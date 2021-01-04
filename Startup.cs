@@ -23,12 +23,17 @@ namespace LashApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                   );
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod()
+            //       );
+            //});
+
+            services.AddCors();
+
 
             services.AddControllersWithViews().AddJsonOptions(options => {
                 // set this option to TRUE to indent the JSON output
@@ -77,7 +82,11 @@ namespace LashApp
             }
 
             app.UseRouting();
-            app.UseCors("CorsPolicy");
+            app.UseCors(x => x
+             .AllowAnyHeader()
+             .AllowAnyMethod()
+             .AllowAnyOrigin());
+            //app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
