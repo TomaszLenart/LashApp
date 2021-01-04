@@ -50,7 +50,9 @@ export class ClientEditComponent
             phone: new FormControl('', [Validators.required,  Validators.pattern('^[0-9]{9,13}$')]),
             dateOfBirth: new FormControl(''),
             locationId: new FormControl('', Validators.required)
-        }, null, [this.isDupeEmail(),this.isDupePhone()]);
+        }, null, [
+            // this.isDupeEmail(),this.isDupePhone()
+        ]);
 
         this.loadData();
     }

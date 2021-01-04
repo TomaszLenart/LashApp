@@ -18,6 +18,10 @@ import { ClientService } from './components/clients/client.service';
 import { ClientDetailsComponent } from './components/clients/client-details/client-details.component';
 import { ClientGalleryComponent } from './components/clients/client-details/client-gallery/client-gallery.component';
 import { ClientAppointmentsComponent } from './components/clients/client-details/client-appointments/client-appointments.component';
+import { TreatmentsComponent } from './components/treatments/treatments.component';
+import { TreatmentDetailsComponent } from './components/treatments/treatment-details/treatment-details.component';
+import { TreatmentEditComponent } from './components/treatments/treatment-details/treatment-edit/treatment-edit.component';
+import { TreatmentStatisticsComponent } from './components/treatments/treatment-details/treatment-statistics/treatment-statistics.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { ClientAppointmentsComponent } from './components/clients/client-details
     ClientDetailsComponent,
     LocationsComponent,
     LocationEditComponent,
+    TreatmentDetailsComponent,
+    TreatmentEditComponent,
+    TreatmentsComponent,
+    TreatmentStatisticsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +53,10 @@ import { ClientAppointmentsComponent } from './components/clients/client-details
       { path: 'locations', component: LocationsComponent},
       { path: 'location/:id', component: LocationEditComponent },
       { path: 'location', component: LocationEditComponent },
+      { path: 'treatments', component: TreatmentsComponent},
+      // { path: 'client/:id', component: ClientEditComponent },
+      { path: 'treatment/:id', component: TreatmentDetailsComponent },
+      { path: 'treatment', component: TreatmentEditComponent },
 
 
     ]),

@@ -1,0 +1,119 @@
+<div class="treatment-edit">
+    <h1>{{title}}</h1>
+  
+    <p *ngIf="this.id && !treatment"><em>Loading...</em></p>
+  
+    <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+      
+        <div class="form-group">
+            <label for="name">Nazwa</label>
+            <br />
+            <input type="text" id="name"
+                formControlName="name" required
+                placeholder="Nazwa"
+                class="form-control"
+                />
+            <div *ngIf="hasError('name')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('name').errors?.required">
+                    Nazwa is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Cena</label>
+            <br />
+            <input type="text" id="price"
+                formControlName="price" required
+                placeholder="Cena"
+                class="form-control"
+                />
+            <div *ngIf="hasError('price')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('price').errors?.required">
+                  Cena is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="duration">Czas</label>
+            <br />
+            <input type="text" id="duration"
+                formControlName="duration" required
+                placeholder="HH:MM"
+                class="form-control"
+                />
+            <div *ngIf="hasError('duration')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('duration').errors?.required">
+                  Czas is required.
+                </div>
+                <div *ngIf="form.get('duration').errors?.pattern">
+                    Format czasu jest nieprawidłowy.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="shortDescription">Opis</label>
+            <br />
+            <input type="text" id="shortDescription"
+                formControlName="shortDescription" required
+                placeholder="Opis"
+                class="form-control"
+                />
+            <div *ngIf="hasError('shortDescription')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('shortDescription').errors?.required">
+                    Phone is required.
+                </div>
+                <div *ngIf="form.get('shortDescription').errors?.pattern">
+                    Wprowadzono nieprawidłowy numer telefonu.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="details">Szczegóły</label>
+            <br />
+            <input type="text" id="details"
+                formControlName="details" required
+                placeholder="Szczegóły"
+                class="form-control"
+                />
+            <div *ngIf="hasError('details')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('details').errors?.required">
+                    Phone is required.
+                </div>
+                <div *ngIf="form.get('details').errors?.pattern">
+                    Wprowadzono nieprawidłowy numer telefonu.
+                </div>
+            </div>
+        </div>
+  
+        <div class="form-group commands">
+            <button *ngIf="id" type="submit"
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid"
+                    class="btn btn-success">
+                Save
+            </button>
+            <button *ngIf="!id" type="submit"
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid"
+                    class="btn btn-success">
+                Create
+            </button>
+            <button type="button"
+                    [routerLink]="['/treatments']"
+                    class="btn btn-default">
+                Cancel
+            </button>
+        </div>
+    </div>
+  </div>
+  

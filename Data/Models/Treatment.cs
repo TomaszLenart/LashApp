@@ -18,7 +18,7 @@ namespace LashApp.Data.Models
         public decimal Price { get; set; }
         public DateTime ActiveFrom { get; set; }
         public DateTime? ActiveTo { get; set; }
-        public TimeSpan Duration { get; set; }
+        public string Duration { get; set; }
         public string ShortDescription { get; set; }
         public string Details { get; set; }
 

@@ -1,0 +1,67 @@
+
+<h1>Treatments</h1>
+
+<p>Here's a list of treatments: feel free to play with it.</p>
+
+<p *ngIf="!treatments"><em>Loading...</em></p>
+
+<div class="commands text-right" *ngIf="treatments">
+<button type="button"
+        [routerLink]="['/treatment']"
+        class="btn btn-success">
+    Add a new treatment
+</button>
+</div>
+
+<mat-form-field [hidden]="!treatments">
+<input matInput (keyup)="loadData($event.target.value)"
+    placeholder="Filter by name (or part of it)...">
+</mat-form-field>
+
+<table mat-table [dataSource]="treatments" class="mat-elevation-z8" [hidden]="!treatments"
+    matSort (matSortChange)="loadData()"
+    matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
+
+<!-- Id Column -->
+<ng-container matColumnDef="treatmentId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let treatment"> {{treatment.treatmentId}} </td>
+</ng-container>
+
+<!-- Name Column -->
+<ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let treatment">  {{treatment.name}}
+    </td>
+</ng-container>
+
+<!-- Lat Column -->
+<ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena</th>
+    <td mat-cell *matCellDef="let treatment"> {{treatment.price}} </td>
+</ng-container>  
+<!-- Lat Column -->
+<ng-container matColumnDef="duration">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Czas</th>
+    <td mat-cell *matCellDef="let treatment"> {{treatment.duration}} </td>
+</ng-container>
+<ng-container matColumnDef="shortDescription">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Opis</th>
+    <td mat-cell *matCellDef="let treatment"> {{treatment.shortDescription}} </td>
+</ng-container>
+
+<ng-container matColumnDef="details">
+    <th mat-header-cell *matHeaderCellDef ></th>
+    <td mat-cell *matCellDef="let treatment"> <a [routerLink]="[ '/treatment', treatment.treatmentId ]"> Szczegóły...</a> </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+﻿
+<!-- Pagination directive -->
+<mat-paginator [hidden]="!treatments"
+    (page)="getData($event)"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 20, 50]"
+    showFirstLastButtons></mat-paginator>
