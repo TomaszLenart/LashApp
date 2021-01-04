@@ -1,0 +1,68 @@
+
+
+
+
+
+    <h1>Countries</h1>
+
+    <p>Here's a list of locations: feel free to play with it.</p>
+
+    <p *ngIf="!locations"><em>Loading...</em></p>
+
+    <div class="commands text-right" *ngIf="locations">
+    <button type="button"
+            [routerLink]="['/location']"
+            class="btn btn-success">
+        Add a new Location
+    </button>
+    </div>
+
+    <mat-form-field [hidden]="!locations">
+    <input matInput (keyup)="loadData($event.target.value)"
+        placeholder="Filter by name (or part of it)...">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="locations" class="mat-elevation-z8" [hidden]="!locations"
+        matSort (matSortChange)="loadData()"
+        matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="locationId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let location"> {{location.locationId}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let location">
+        <a [routerLink]="['/location', location.locationId]">{{location.name}}</a>
+        </td>
+    </ng-container>
+
+    <!-- Lat Column -->
+    <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+        <td mat-cell *matCellDef="let location"> {{location.address}} </td>
+    </ng-container>  <!-- Lat Column -->
+    <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+        <td mat-cell *matCellDef="let location"> {{location.city}} </td>
+    </ng-container>
+
+    <!-- Lon Column -->
+    <ng-container matColumnDef="cityCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>CityCode</th>
+        <td mat-cell *matCellDef="let location"> {{location.cityCode}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    ﻿
+    <!-- Pagination directive -->
+    <mat-paginator [hidden]="!locations"
+        (page)="getData($event)"
+        [pageSize]="10"
+        [pageSizeOptions]="[10, 20, 50]"
+        showFirstLastButtons></mat-paginator>

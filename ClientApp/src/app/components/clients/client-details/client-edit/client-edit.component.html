@@ -1,0 +1,136 @@
+<div class="client-edit">
+    <h1>{{title}}</h1>
+  
+    <p *ngIf="this.id && !client"><em>Loading...</em></p>
+  
+    <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+        <div *ngIf="form.invalid && form.errors?.isDupeCity"
+             class="alert alert-danger">
+              <strong>ERROR</strong>:
+              A client with the same <i>email</i>, or phone already exists.
+        </div>
+      
+        <div class="form-group">
+            <label for="firstName">Imię</label>
+            <br />
+            <input type="text" id="firstName"
+                formControlName="firstName" required
+                placeholder="Imię"
+                class="form-control"
+                />
+            <div *ngIf="hasError('firstName')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('firstName').errors?.required">
+                  Imię is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Nazwisko</label>
+            <br />
+            <input type="text" id="lastName"
+                formControlName="lastName" required
+                placeholder="Nazwisko"
+                class="form-control"
+                />
+            <div *ngIf="hasError('lastName')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('lastName').errors?.required">
+                  Nazwisko is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <br />
+            <input type="text" id="email"
+                formControlName="email" required
+                placeholder="Email"
+                class="form-control"
+                />
+            <div *ngIf="hasError('email')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('email').errors?.required">
+                  Email is required.
+                </div>
+                <div *ngIf="form.get('email').errors?.email">
+                    Wprowadzono nieprawidłowy adres email.
+                  </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Telefon</label>
+            <br />
+            <input type="text" id="phone"
+                formControlName="phone" required
+                placeholder="Telefon"
+                class="form-control"
+                />
+            <div *ngIf="hasError('phone')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('phone').errors?.required">
+                    Phone is required.
+                </div>
+                <div *ngIf="form.get('phone').errors?.pattern">
+                    Wprowadzono nieprawidłowy numer telefonu.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="dateOfBirth">Data urodzenia:</label>
+            <br />
+            <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input formControlName="dateOfBirth"  id="dateOfBirth" matInput [matDatepicker]="myPicker"  placeholder="Date">
+                <mat-datepicker-toggle  matSuffix [for]="myPicker"></mat-datepicker-toggle>
+                <mat-datepicker #myPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+      
+        <div class="form-group">
+            <label for="locations">Lokalizacja:</label>
+            <br />
+            <mat-form-field *ngIf="locations">
+              <mat-label>Wybierz lokaliację...</mat-label>
+              <mat-select id="locationId" formControlName="locationId">
+                <mat-option *ngFor="let location of locations" [value]="location.locationId">
+                  {{location.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <div *ngIf="hasError('locationId')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('locationId').errors?.required">
+                  Please select a Location.
+                </div>
+            </div>
+        </div>
+  
+        <div class="form-group commands">
+            <button *ngIf="id" type="submit"
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid"
+                    class="btn btn-success">
+                Save
+            </button>
+            <button *ngIf="!id" type="submit"
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid"
+                    class="btn btn-success">
+                Create
+            </button>
+            <button type="button"
+                    [routerLink]="['/clients']"
+                    class="btn btn-default">
+                Cancel
+            </button>
+        </div>
+    </div>
+  </div>
+  
