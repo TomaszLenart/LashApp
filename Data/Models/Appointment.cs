@@ -31,10 +31,10 @@ namespace LashApp.Data.Models
         public int TreatmentId { get; set; }
        
         [Required]
-        public DateTime From { get; set; }
+        public DateTime Date { get; set; }
        
         [Required]
-        public DateTime To { get; set; }
+        public DateTime Hour { get; set; }
 
         public virtual Client Client { get; set; }
         public virtual Location Location { get; set; }

@@ -45,8 +45,8 @@ namespace LashApp.Controllers.Appointments
                  Location = a.Location.Name,
                  Worker = a.Worker.FirstName + ' ' + a.Worker.LastName,
                  Treatment = a.Treatment.Name,
-                 From = a.From,
-                 To = a.To
+                 Date = a.Date,
+                 Hour = a.Hour
 
              }),
              pageIndex,

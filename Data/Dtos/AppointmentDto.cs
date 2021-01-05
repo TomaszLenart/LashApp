@@ -19,8 +19,8 @@ namespace LashApp.Data.Dtos
         public string Location { get; set; }
         public string Worker { get; set; }
         public string Treatment { get; set; }
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime Hour { get; set; }
 
     }
 }
