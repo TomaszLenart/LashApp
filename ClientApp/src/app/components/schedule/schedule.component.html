@@ -1,0 +1,15 @@
+<div>
+        <ng-container *ngFor="let day of dates  ; let i=index">
+            <div class="row">
+                <ng-container *ngFor="let hour of hours ; let j = index">
+                    <div class="col">
+                        <span *ngIf="i==0 && j>0">
+                        {{dates[j].date}}
+                        </span>
+                         <span *ngIf="j==0 && i>0 "> {{hours[i].time}}</span>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+</div>
+        

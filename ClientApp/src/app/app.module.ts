@@ -22,6 +22,9 @@ import { TreatmentsComponent } from './components/treatments/treatments.componen
 import { TreatmentDetailsComponent } from './components/treatments/treatment-details/treatment-details.component';
 import { TreatmentEditComponent } from './components/treatments/treatment-details/treatment-edit/treatment-edit.component';
 import { TreatmentStatisticsComponent } from './components/treatments/treatment-details/treatment-statistics/treatment-statistics.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { CommonModule } from '@angular/common';
+import { ScheduleModule } from './components/schedule/schedule.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { TreatmentStatisticsComponent } from './components/treatments/treatment-
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
@@ -57,12 +61,15 @@ import { TreatmentStatisticsComponent } from './components/treatments/treatment-
       // { path: 'client/:id', component: ClientEditComponent },
       { path: 'treatment/:id', component: TreatmentDetailsComponent },
       { path: 'treatment', component: TreatmentEditComponent },
+      { path: 'schedule', component: ScheduleComponent },
 
 
     ]),
     BrowserAnimationsModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    ScheduleModule
   ],
   providers: [LocationService,ClientService],
   bootstrap: [AppComponent]
