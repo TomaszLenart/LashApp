@@ -28,12 +28,12 @@
 
   <ng-container matColumnDef="from">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
-    <td mat-cell *matCellDef="let appointment">  {{appointment.from | date: "yyyy-MM-dd" }}  </td>
+    <td mat-cell *matCellDef="let appointment">  {{appointment.date | date: "yyyy-MM-dd" }}  </td>
   </ng-container>
 
   <ng-container matColumnDef="hour">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Godzina</th>
-    <td mat-cell *matCellDef="let appointment">  {{ appointment.from }} </td>
+    <td mat-cell *matCellDef="let appointment">  {{ appointment.hour | date: "hh:mm" }} </td>
   </ng-container>
 
   <ng-container matColumnDef="location">

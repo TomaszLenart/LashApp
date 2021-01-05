@@ -12,6 +12,7 @@ import { ILocation } from '../../locations/location';
 import { ITreatment } from '../../treatments/treatment';
 import { ClientService } from '../../clients/client.service';
 import { ApiResult } from 'src/app/shared/services/base.service';
+import { TreatmentService } from '../../treatments/treatments.service';
 
 
 
@@ -47,7 +48,8 @@ export class AppointmentEditComponent
         private http: HttpClient,
         @Inject('BASE_URL') private baseUrl: string,
         private appointmentService: AppointmentService,
-        private clientService: ClientService) {
+        private clientService: ClientService,
+        private treatmentService: TreatmentService) {
             super();
             this.loadData();
     }
@@ -56,13 +58,18 @@ export class AppointmentEditComponent
       this.form = new FormGroup({
             locationId: new FormControl('', Validators.required),
             clientId: new FormControl('', Validators.required),
+            treatmentId: new FormControl('', Validators.required),
+            date: new FormControl(''),
+            hour: new FormControl(''),
+
+
 
             // address: new FormControl('', Validators.required),
             // city: new FormControl('', Validators.required),
             // cityCode: new FormControl('', [Validators.required]) 
         }, null,null);
 
-        // this.loadTreatments();
+        this.loadTreatments();
          this.loadLocations();
         this.loadClients();
         this.loadData();
@@ -124,42 +131,74 @@ export class AppointmentEditComponent
             }, error => console.error(error));
     }
 
+    
+    loadTreatments() {
+        // fetch all the locations from the server
+        this.treatmentService.getData<ApiResult<ITreatment>>(
+        0,
+        9999,
+        "name",
+        null,
+        null,
+        null,
+        ).subscribe(result => {
+            console.log(result)
+            this.treatments = result.data;
+            }, error => console.error(error));
+    }
+
+
     onSubmit() {
 
-        // var appointment = (this.id) ? this.appointment : <IAppointment>{};
+        var appointment = (this.id) ? this.appointment : <IAppointment>{};
 
-        // appointment.name = this.form.get("name").value;
-        // appointment.address = this.form.get("address").value;
-        // appointment.city = this.form.get("city").value;
-        // appointment.cityCode = this.form.get("cityCode").value;
+        appointment.clientId = this.form.get("clientId").value;
+        appointment.treatmentId = this.form.get("treatmentId").value;
+        appointment.locationId = this.form.get("locationId").value;
 
-        // if (this.id) {
-        // // EDIT mode
+        console.log()
+        let tempDate = new Date();
+        let hourString: string = this.form.get("hour").value;
 
-        // var url = this.baseUrl + "api/appointments/" + this.appointment.appointmentId;
-        // this.http
-        //     .put<IAppointment>(url, appointment)
-        //     .subscribe(result => {
+        console.log(hourString);
+        console.log(hourString.substring(0, hourString.indexOf(':')));
+        console.log(hourString.substring(hourString.indexOf(':')+1, hourString.length));
 
-        //     console.log("Appointment " + appointment.appointmentId + " has been updated.");
+        tempDate.setHours(Number(hourString.substring(0, hourString.indexOf(':'))));
+        tempDate.setMinutes(Number(hourString.substring( hourString.indexOf(':')+1, hourString.length)));
 
-        //     // go back to cities view
-        //     this.router.navigate(['/appointments']);
-        //     }, error => console.log(error));
-        // }
-        // else {
-        // // ADD NEW mode
-        // var url = this.baseUrl + "api/appointments";
-        // this.http
-        //     .post<IAppointment>(url, appointment)
-        //     .subscribe(result => {
+        console.log(tempDate);
+        appointment.date = this.form.get("date").value;
+        appointment.hour = tempDate;
+        appointment.workerId = 1;
+        if (this.id) {
+        // EDIT mode
 
-        //     console.log("Appointment " + result.appointmentId + " has been created.");
+        var url = this.baseUrl + "api/appointments/" + this.appointment.appointmentId;
+        this.http
+            .put<IAppointment>(url, appointment)
+            .subscribe(result => {
 
-        //     // go back to cities view
-        //     this.router.navigate(['/appointments']);
-        //     }, error => console.log(error));
-        // }
+            console.log("Appointment " + appointment.appointmentId + " has been updated.");
+
+            // go back to cities view
+            this.router.navigate(['/appointments']);
+            }, error => console.log(error));
+        }
+        else {
+        // ADD NEW mode
+        var url = this.baseUrl + "api/appointments";
+        console.log(appointment);
+        this.http
+            .post<IAppointment>(url, appointment)
+            .subscribe(result => {
+
+            console.log("Appointment " + result.appointmentId + " has been created.");
+
+            // go back to cities view
+            this.router.navigate(['/appointments']);
+            }, error => console.log(error));
+        }
     }
 
     isAppointmentEdited(): boolean {

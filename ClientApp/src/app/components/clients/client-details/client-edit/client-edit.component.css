@@ -11,4 +11,3 @@ input.ng-valid {
   input.ng-invalid ~ .invalid-feedback {
     display: block;
   }
-  

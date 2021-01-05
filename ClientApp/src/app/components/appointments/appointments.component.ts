@@ -16,7 +16,7 @@ export class AppointmentsComponent {
 
   defaultPageIndex: number = 0;
   defaultPageSize: number = 10;
-  public defaultSortColumn: string = "from";
+  public defaultSortColumn: string = "date";
   public defaultSortOrder: string = "asc";
   defaultFilterColumn: string = "client";
   filterQuery:string = null;
