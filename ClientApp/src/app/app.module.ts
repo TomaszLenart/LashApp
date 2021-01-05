@@ -22,7 +22,6 @@ import { TreatmentsComponent } from './components/treatments/treatments.componen
 import { TreatmentDetailsComponent } from './components/treatments/treatment-details/treatment-details.component';
 import { TreatmentEditComponent } from './components/treatments/treatment-details/treatment-edit/treatment-edit.component';
 import { TreatmentStatisticsComponent } from './components/treatments/treatment-details/treatment-statistics/treatment-statistics.component';
-import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService, ScheduleComponent } from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
   declarations: [
@@ -58,17 +57,14 @@ import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, WorkWe
       // { path: 'client/:id', component: ClientEditComponent },
       { path: 'treatment/:id', component: TreatmentDetailsComponent },
       { path: 'treatment', component: TreatmentEditComponent },
-      { path: 'schedule', component: ScheduleComponent },
-
 
 
     ]),
     BrowserAnimationsModule,
     AngularMaterialModule,
-    ReactiveFormsModule,
-    ScheduleModule, RecurrenceEditorModule
+    ReactiveFormsModule
   ],
-  providers: [LocationService,ClientService,  DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService],
+  providers: [LocationService,ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
