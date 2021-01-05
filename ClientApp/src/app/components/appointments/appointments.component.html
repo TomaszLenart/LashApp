@@ -1,0 +1,69 @@
+<h1>Appointments</h1>
+
+<p>Here's a list of appointments: feel free to play with it.</p>
+
+<p *ngIf="!appointments"><em>Loading...</em></p>
+
+<div class="commands text-right" *ngIf="appointments">
+  <button type="submit"
+          [routerLink]="['/appointment']"
+          class="btn btn-success">
+      Add a new Appointment
+  </button>
+</div>
+
+<mat-form-field [hidden]="!appointments">
+    <input matInput (keyup)="loadData($event.target.value)"
+        placeholder="Filter by name (or part of it)...">
+</mat-form-field>
+
+<table mat-table [dataSource]="appointments" class="mat-elevation-z8" [hidden]="!appointments"
+    matSort (matSortChange)="loadData()"
+    matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
+
+  <ng-container matColumnDef="appointmentId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let appointment"> {{appointment.appointmentId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="from">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+    <td mat-cell *matCellDef="let appointment">  {{appointment.from | date: "yyyy-MM-dd" }}  </td>
+  </ng-container>
+
+  <ng-container matColumnDef="hour">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Godzina</th>
+    <td mat-cell *matCellDef="let appointment">  {{ appointment.from }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Lokalizacja</th>
+    <td mat-cell *matCellDef="let appointment"> {{appointment.location}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="treatment">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Zabieg</th>
+    <td mat-cell *matCellDef="let appointment"> {{appointment.treatment}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="client">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Klient</th>
+    <td mat-cell *matCellDef="let appointment"> {{appointment.client }} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="clientPhone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tel. kontaktowy</th>
+    <td mat-cell *matCellDef="let appointment"> {{appointment.clientPhone }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="'highlight'" (click)="getRecord(row)"></tr>
+</table>
+﻿
+<!-- Pagination directive -->
+<mat-paginator [hidden]="!appointments"
+    (page)="getData($event)"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 20, 50]"
+    showFirstLastButtons></mat-paginator>

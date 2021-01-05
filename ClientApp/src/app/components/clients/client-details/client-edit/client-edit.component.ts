@@ -8,6 +8,7 @@ import { BaseFormComponent } from 'src/app/shared/helpers/base.form.component';
 import { IClient } from '../../client';
 import { ClientService } from '../../client.service';
 import { ApiResult } from 'src/app/shared/services/base.service';
+import { ILocation } from 'src/app/components/locations/location';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class ClientEditComponent
     id?: number;
 
     // the locations array for the select
-    locations: Location[];
+    locations: ILocation[];
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -85,7 +86,7 @@ export class ClientEditComponent
 
     loadLocations() {
         // fetch all the locations from the server
-        this.clientService.getLocations<ApiResult<Location>>(
+        this.clientService.getLocations<ApiResult<ILocation>>(
         0,
         9999,
         "name",

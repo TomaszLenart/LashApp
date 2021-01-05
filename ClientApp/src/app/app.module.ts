@@ -25,6 +25,8 @@ import { TreatmentStatisticsComponent } from './components/treatments/treatment-
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { CommonModule } from '@angular/common';
 import { ScheduleModule } from './components/schedule/schedule.module';
+import { AppointmentsComponent } from './components/appointments/appointments.component';
+import { AppointmentEditComponent } from './components/appointments/appointment-edit/appointment-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ScheduleModule } from './components/schedule/schedule.module';
     TreatmentDetailsComponent,
     TreatmentEditComponent,
     TreatmentsComponent,
-    TreatmentStatisticsComponent
+    TreatmentStatisticsComponent,
+    AppointmentEditComponent,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -62,6 +66,11 @@ import { ScheduleModule } from './components/schedule/schedule.module';
       { path: 'treatment/:id', component: TreatmentDetailsComponent },
       { path: 'treatment', component: TreatmentEditComponent },
       { path: 'schedule', component: ScheduleComponent },
+      { path: 'appointments', component: AppointmentsComponent },
+      { path: 'appointment/:id', component: AppointmentEditComponent },
+      { path: 'appointment', component: AppointmentEditComponent },
+
+
 
 
     ]),
