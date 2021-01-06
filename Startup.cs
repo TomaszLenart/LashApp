@@ -1,4 +1,6 @@
 using LashApp.Data.Db;
+using LashApp.Data.Interfaces;
+using LashApp.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,8 +34,8 @@ namespace LashApp
             //       );
             //});
 
+            services.AddSingleton<IPaymentService, PaymentService>();
             services.AddCors();
-
 
             services.AddControllersWithViews().AddJsonOptions(options => {
                 // set this option to TRUE to indent the JSON output

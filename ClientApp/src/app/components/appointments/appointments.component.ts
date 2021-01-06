@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { IAppointment } from './appointment';
 import { MatSort } from '@angular/material/sort';
+import { AppointmentService } from './appointment.service';
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
@@ -11,7 +12,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class AppointmentsComponent {
 
-  public displayedColumns: string[] = ['appointmentId', 'from', 'hour', 'location','treatment','client','clientPhone'];
+  public displayedColumns: string[] = ['appointmentId', 'from', 'hour', 'location','treatment','client','clientPhone', 'payment'];
   public appointments: MatTableDataSource<IAppointment>;
 
   defaultPageIndex: number = 0;
@@ -24,7 +25,7 @@ export class AppointmentsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor( private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+  constructor( private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private appointmentService: AppointmentService) {
   }
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit() {
@@ -67,6 +68,20 @@ export class AppointmentsComponent {
   }
 
   getRecord(row){
-    console.log(row);
+    // console.log(row);
+  }
+
+  processPayment(appointment: IAppointment){
+    console.log("procesuje payment");
+    this.appointmentService.processPayment(appointment).subscribe(result=>{
+      if(result)
+        console.log("Opłacone: wizyta" + appointment.appointmentId)
+        else{
+          console.log("Nie Opłacone: wizyta" + appointment.appointmentId)
+        }
+    }
+
+    )
+
   }
 }

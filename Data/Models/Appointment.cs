@@ -36,6 +36,10 @@ namespace LashApp.Data.Models
         [Required]
         public DateTime Hour { get; set; }
 
+        public bool IsPaid { get; set; }
+
+        public DateTime? PayDate { get; set; }
+
         public virtual Client Client { get; set; }
         public virtual Location Location { get; set; }
         public virtual Worker Worker { get; set; }

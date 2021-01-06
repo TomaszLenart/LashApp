@@ -10,6 +10,7 @@ using LashApp.Data.Models;
 using LashApp.Data;
 using WorldCities.Data;
 using LashApp.Data.Dtos;
+using LashApp.Data.Interfaces;
 
 namespace LashApp.Controllers.Appointments
 {
@@ -18,10 +19,14 @@ namespace LashApp.Controllers.Appointments
     public class AppointmentsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IPaymentService _paymentService;
 
-        public AppointmentsController(AppDbContext context)
+        public AppointmentsController(AppDbContext context
+            , IPaymentService paymentService
+            )
         {
             _context = context;
+            _paymentService = paymentService;
         }
 
         // GET: api/Appointments
@@ -46,7 +51,8 @@ namespace LashApp.Controllers.Appointments
                  Worker = a.Worker.FirstName + ' ' + a.Worker.LastName,
                  Treatment = a.Treatment.Name,
                  Date = a.Date,
-                 Hour = a.Hour
+                 Hour = a.Hour,
+                 IsPaid = a.IsPaid
 
              }),
              pageIndex,
@@ -134,6 +140,16 @@ namespace LashApp.Controllers.Appointments
             return _context.Appointments.Any(e => e.AppointmentId == id);
         }
 
+        // POST: api/Appointments
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        [Route("ProcessPayment/{appointmentId}")]
+        public async Task<ActionResult<bool>> ProcessPayment(int appointmentId)
+        {
+            var result = await _paymentService.ProcessPayment(appointmentId,_context);
+
+            return Ok(result);
+        }
 
     }
 }

@@ -1,5 +1,5 @@
 <h1>Appointments</h1>
-
+<i class="fas fa-check"></i>
 <p>Here's a list of appointments: feel free to play with it.</p>
 
 <p *ngIf="!appointments"><em>Loading...</em></p>
@@ -55,6 +55,17 @@
   <ng-container matColumnDef="clientPhone">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Tel. kontaktowy</th>
     <td mat-cell *matCellDef="let appointment"> {{appointment.clientPhone }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="payment">
+    <th mat-header-cell *matHeaderCellDef ></th>
+    <td mat-cell *matCellDef="let appointment"> 
+      <button *ngIf="!appointment.isPaid; else paidBlock" (click)="processPayment(appointment)" class="btn btn-primary" >Zapłać</button>
+      <ng-template #paidBlock>
+        <span style="color:rgb(61, 236, 8); border: yellow;"><i class="fas fa-check"></i>Zapłacono</span>
+      </ng-template>
+        
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

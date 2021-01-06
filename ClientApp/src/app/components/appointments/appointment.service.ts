@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from 'src/app/shared/services/base.service';
 import { IAppointment } from './appointment';
@@ -55,8 +55,35 @@ export class AppointmentService
         return this.http.post<Appointment>(url, item);
     }
 
+    processPayment(item): Observable<boolean> {
+        var url = this.baseUrl + "api/Appointments/ProcessPayment";
+        
+        // let headers = new HttpHeaders({
+        //     'Access-Control-Allow-Origin': '*',
+        //      });
+        // let options = { headers: headers };
+        // item.isPaid = false;
+        // console.log(item);
+        // return this.http.post<boolean>(url, item);
+
+
+        var url = this.baseUrl + "api/Appointments/ProcessPayment/" + item.appointmentId;
+        return this.http.post<boolean>(url, item);
+    }
+
     isDupeAppointment(appointment: IAppointment ): Observable<boolean> {
+        // let headers = new HttpHeaders();
+        // headers.append('Access-Control-Allow-Origin', 'http://localhost:3000/');
+        // headers.append('Access-Control-Allow-Origin', '*');
+
+
+        let headers = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+             });
+        let options = { headers: headers };
+
+
         var url = this.baseUrl + "api/Appointments/IsDupeAppointment";
-        return this.http.post<boolean>(url, appointment);
+        return this.http.post<boolean>(url, appointment,options);
     }
 }

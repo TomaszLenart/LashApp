@@ -10,4 +10,6 @@ export class IAppointment{
     clientId: number;
     clientPhone: string;
     workerId:number;
+    isPaid: boolean;
+    payDate: Date;
 }
