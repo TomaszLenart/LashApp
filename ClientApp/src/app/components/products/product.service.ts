@@ -60,6 +60,22 @@ export class ProductService
         return this.http.get<IProductQuantityChange>(url);
     }
 
+    getProductQuantity(productId): Observable<number> {
+        var url = this.baseUrl + "api/ProductQuantityChanges/ProductQuantity/" + productId;
+        return this.http.get<number>(url);
+    }
+
+
+    changeProductQuantity(productId:number, changeQuantity: number, isPurchase: boolean):Observable<boolean>{
+        var data = {
+            "productId": productId,
+            "quantityChange": changeQuantity,
+            "isPurchase":true
+        }
+        var url = this.baseUrl + "api/ProductQuantityChanges/ChangeProductQuantity";
+        return this.http.post<boolean>(url, data);
+    }
+
     processPayment(item): Observable<boolean> {
         var url = this.baseUrl + "api/Products/ProcessPayment";
         

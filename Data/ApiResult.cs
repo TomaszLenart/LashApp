@@ -72,7 +72,7 @@ namespace LashApp.Data
                 filterColumn),
                 filterQuery);
             }
-            var count = await source.CountAsync();
+            var count = source.Count();
 
             if (!String.IsNullOrEmpty(sortColumn)
              && IsValidProperty(sortColumn)
@@ -93,7 +93,7 @@ namespace LashApp.Data
             source = source
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize);
-            var data = await source.ToListAsync();
+            var data = source.ToList();
             return new ApiResult<T>(
                 data,
                 count,

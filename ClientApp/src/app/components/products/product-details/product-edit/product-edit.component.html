@@ -22,15 +22,7 @@
             </div>
         </div>
         
-        <div *ngIf="this.id" class="form-group">
-            <label for="address">Ilość</label>
-            <br />
-            <input type="text" id="quantity"
-                formControlName="quantity" required
-                class="form-control"
-                />
-          
-        </div>
+    
 
         <div class="form-group">
             <label for="price">Cena</label>
@@ -47,6 +39,8 @@
                     </div>
             </div>
         </div>
+
+    
       
         <div class="form-group commands">
             <button *ngIf="id" type="submit"

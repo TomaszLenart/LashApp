@@ -9,6 +9,8 @@ using LashApp.Data.Db;
 using LashApp.Data.Models;
 using LashApp.Data;
 using LashApp.Data.Dtos;
+using LashApp.Data.Services;
+using LashApp.Data.Interfaces;
 
 namespace LashApp.Controllers
 {
@@ -17,10 +19,12 @@ namespace LashApp.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IProductQuantityChangesService _productQuantityChangeService;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(AppDbContext context, IProductQuantityChangesService productQuantityChangeService)
         {
             _context = context;
+            _productQuantityChangeService = productQuantityChangeService;
         }
 
         // GET: api/Products
@@ -33,18 +37,25 @@ namespace LashApp.Controllers
         string filterColumn = null,
         string filterQuery = null)
         {
-            return await ApiResult<ProductDto>.CreateAsync(
-             _context.Products
+
+            var products = await _context.Products
              .Select(p => new ProductDto()
              {
                  ProductId = p.ProductId,
                  Active = p.Active,
                  Name = p.Name,
-                 Quantity = p.Quantity,
+                 //Quantity = _productQuantityChangeService.GetProductQuantity(p.ProductId, _context)
                  Price = p.Price
 
 
-             }),
+             }).ToListAsync();
+            foreach(var product in products)
+            {
+                var quantity = await _productQuantityChangeService.GetProductQuantity(product.ProductId, _context);
+                product.Quantity = quantity;
+            }
+            return await ApiResult<ProductDto>.CreateAsync(products.AsQueryable()
+             ,
              pageIndex,
              pageSize,
              sortColumn,
@@ -55,16 +66,25 @@ namespace LashApp.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return product;
+            var result = new ProductDto()
+            {
+                ProductId = product.ProductId,
+                Active = product.Active,
+                Name = product.Name,
+                Price = product.Price,
+                Quantity = await _productQuantityChangeService.GetProductQuantity(product.ProductId, _context)
+            };
+
+            return result;
         }
 
         // PUT: api/Products/5

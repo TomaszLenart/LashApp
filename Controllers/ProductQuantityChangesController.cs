@@ -10,6 +10,7 @@ using LashApp.Data.Models;
 using LashApp.Data;
 using LashApp.Data.Dtos;
 using LashApp.Data.Interfaces;
+using LashApp.Data.QueryParameters;
 
 namespace LashApp.Controllers
 {
@@ -159,6 +160,25 @@ namespace LashApp.Controllers
         public async Task<ActionResult<List<ProductQuantityChangeDto>>> GetProductQuantityChangesByProduct(int productId)
         {
             var result = await _productQuantityChangeService.GetProductQuantityChanges(productId, _context);
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("ChangeProductQuantity")]
+
+        public async Task<ActionResult<int>> ChangeProductQuantity([FromBody] ProductQuantityChangeParamerets paramerets)
+        {
+            var result = await _productQuantityChangeService.ChangeProductQuantity(paramerets, _context);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("ProductQuantity/{productId}")]
+        public async Task<ActionResult<int>> ChangeProductQuantity(int productId)
+        {
+            var result = await _productQuantityChangeService.GetProductQuantity(productId, _context);
 
             return Ok(result);
         }

@@ -9,10 +9,11 @@
             </div>
             <div class="col">
                 <div class="box">
-                    <app-product-history [product]="product"></app-product-history>
+                    <app-product-quantity-change [product]="product" (valueChange)="quantityChange($event)"></app-product-quantity-change>
                 </div>
+                <br /> 
                 <div class="box">
-                    <app-product-quantity-change [product]="product"></app-product-quantity-change>
+                    <app-product-history [product]="product"></app-product-history>
                 </div>
             </div>
         </div>

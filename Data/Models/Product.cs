@@ -13,7 +13,6 @@ namespace LashApp.Data.Models
         public int ProductId { get; set; }
         public bool Active { get; set; }
         public string Name { get; set; }
-        public string Quantity { get; set; }
         public string Price { get; set; }
 
     }

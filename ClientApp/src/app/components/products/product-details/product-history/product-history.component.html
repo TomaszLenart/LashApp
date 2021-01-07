@@ -4,11 +4,6 @@
 
 <p *ngIf="!quantityChanges"><em>Loading...</em></p>
 
-<mat-form-field [hidden]="!quantityChanges">
-    <input matInput (keyup)="loadData($event.target.value)"
-        placeholder="Filter by name (or part of it)...">
-</mat-form-field>
-
 <table mat-table [dataSource]="quantityChanges" class="mat-elevation-z8" [hidden]="!quantityChanges"
     matSort (matSortChange)="loadData()"
     matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
@@ -21,8 +16,8 @@
   <ng-container matColumnDef="quantityChange">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
     <td mat-cell *matCellDef="let change"> 
-        <span *ngIf="change.isPurchase; else subBlock"> + </span>
-        <ng-template #subBlock><span> - </span></ng-template>
+        <span *ngIf="change.isPurchase; else subBlock" style="color: green;"> +</span>
+        <ng-template #subBlock><span style="color: red;"> -</span></ng-template>
         
          {{ change.quantityChange}} </td>
   </ng-container>

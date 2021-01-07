@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -11,7 +11,7 @@ import { IProduct } from '../../product';
   templateUrl: './product-quantity-change.component.html',
   styleUrls: ['./product-quantity-change.component.css']
 })
-export class ProductQuantityChangeComponent {
+export class ProductQuantityChangeComponent implements OnInit {
 
   public displayedColumns: string[] = ['productQuantityChangeId', 'quantity'];
   public productQuantityChanges: MatTableDataSource<IProductQuantityChange>;
@@ -27,16 +27,20 @@ export class ProductQuantityChangeComponent {
   defaultFilterColumn: string = "name";
   filterQuery:string = null;
 
+  quantityChange: number = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   @Input() product: IProduct;
+  @Output() valueChange = new EventEmitter();
   
   constructor( private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private productService: ProductService) {
   }
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit() {
     // this.loadData();
+    console.log('aaaaaaaa');
+    console.log(this.product);
   }
 
   loadData(query: string = null) {
@@ -49,12 +53,24 @@ export class ProductQuantityChangeComponent {
       }
   }
 
+  getProductQuantity(){
+    this.productService.getProductQuantity(this.product.productId).subscribe(result=>{
+      this.product.quantity = result;
+    })
+  }
+
   add(){
     console.log('adding');
+    this.productService.changeProductQuantity(this.product.productId, this.quantityChange,true).subscribe(result=>{
+      console.log(result);
+      this.valueChange.emit('dupa');
+      this.getProductQuantity();
+    })
   }
 
   sub(){
     console.log('subbing');
+    console.log(this.quantityChange);
   }
   getData(event: PageEvent) {
 

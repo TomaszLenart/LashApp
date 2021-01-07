@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -6,14 +6,17 @@ import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
 import { IProduct } from '../product';
+import { ProductQuantityChangeComponent } from './product-quantity-change/product-quantity-change.component';
+import { ProductHistoryComponent } from './product-history/product-history.component';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
 
   public product: IProduct;
+   @ViewChild(ProductHistoryComponent) productHisotryComponent: ProductHistoryComponent;
 
   isProductAvailable: boolean = false;
   id:number;
@@ -38,6 +41,10 @@ export class ProductDetailsComponent {
             this.isProductAvailable = true;
         }, error => console.error(error));
     }
+  }
+
+  quantityChange(param:any){
+    this.productHisotryComponent.ngOnInit();
   }
 
 }
