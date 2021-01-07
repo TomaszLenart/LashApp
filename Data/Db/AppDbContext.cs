@@ -30,6 +30,9 @@ namespace LashApp.Data.Db
             modelBuilder.Entity<Location>().ToTable("Locations");
             modelBuilder.Entity<Treatment>().ToTable("Treatments");
             modelBuilder.Entity<Appointment>().ToTable("Appointments");
+            modelBuilder.Entity<Product>().ToTable("Products");
+            modelBuilder.Entity<ProductQuantityChange>().ToTable("ProductQuantityChanges");
+
 
 
         }
@@ -40,6 +43,9 @@ namespace LashApp.Data.Db
         public DbSet<Location> Locations { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductQuantityChange> ProductQuantityChanges { get; set; }
+
 
         #endregion Properties
     }

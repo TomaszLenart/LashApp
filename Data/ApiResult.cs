@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq.Dynamic.Core;
-namespace WorldCities.Data
+namespace LashApp.Data
 {
     public class ApiResult<T>
     {

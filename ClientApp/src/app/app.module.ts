@@ -27,6 +27,11 @@ import { CommonModule } from '@angular/common';
 import { ScheduleModule } from './components/schedule/schedule.module';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
 import { AppointmentEditComponent } from './components/appointments/appointment-edit/appointment-edit.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { ProductEditComponent } from './components/products/product-details/product-edit/product-edit.component';
+import { ProductHistoryComponent } from './components/products/product-details/product-history/product-history.component';
+import { ProductQuantityChangeComponent } from './components/products/product-details/product-quantity-change/product-quantity-change.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,12 @@ import { AppointmentEditComponent } from './components/appointments/appointment-
     TreatmentsComponent,
     TreatmentStatisticsComponent,
     AppointmentEditComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    ProductDetailsComponent,
+    ProductsComponent,
+    ProductEditComponent,
+    ProductHistoryComponent,
+    ProductQuantityChangeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -69,7 +79,9 @@ import { AppointmentEditComponent } from './components/appointments/appointment-
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'appointment/:id', component: AppointmentEditComponent },
       { path: 'appointment', component: AppointmentEditComponent },
-
+      { path: 'products', component: ProductsComponent },
+      { path: 'product/:id', component: ProductDetailsComponent },
+      { path: 'product', component: AppointmentEditComponent },
 
 
 

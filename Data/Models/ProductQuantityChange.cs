@@ -16,7 +16,7 @@ namespace LashApp.Data.Models
        
         [ForeignKey("ProductId")]
         [Required]
-        public int LocationId { get; set; }
+        public int ProductId { get; set; }
         public bool IsPurchase { get; set; }
         public int QuantityChange { get; set; }
         public DateTime Date { get; set; }

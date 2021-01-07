@@ -1,0 +1,20 @@
+<div class="row no-margins">
+    <div class="container">
+        <div>
+            <h1 style="text-align: center;">Dane Klienta</h1> 
+        </div>
+        <div *ngIf="isProductAvailable" class="row">
+            <div class="col box">
+                <app-product-edit [product]="product"></app-product-edit>
+            </div>
+            <div class="col">
+                <div class="box">
+                    <app-product-history [product]="product"></app-product-history>
+                </div>
+                <div class="box">
+                    <app-product-quantity-change [product]="product"></app-product-quantity-change>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

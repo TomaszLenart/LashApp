@@ -1,0 +1,75 @@
+<div class="location-edit">
+    <h1>Stan</h1>
+    {{product.quantity}}
+
+    <button type="button" (click)="add()">Zwiększ</button>
+    <button type="button" (click)="sub()">Zmniejsz</button>
+
+    <!-- <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+     
+
+        <div class="form-group">
+            <label for="name">Nazwa</label>
+            <br />
+            <input type="text" id="name"
+                formControlName="name" required
+                placeholder="Nazwa"
+                class="form-control"
+                />
+            <div *ngIf="hasError('name')"
+                 class="invalid-feedback">
+                <div *ngIf="form.get('name').errors?.required">
+                  Nazwa is required.
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="this.id" class="form-group">
+            <label for="address">Ilość</label>
+            <br />
+            <input type="text" id="quantity"
+                formControlName="quantity" required
+                disabled
+                class="form-control"
+                />
+          
+        </div>
+
+        <div class="form-group">
+            <label for="price">Cena</label>
+            <br />
+            <input type="text" id="price"
+                formControlName="price" required
+                [disabled]="this.id"
+                placeholder="price"
+                class="form-control"
+                />
+            <div *ngIf="hasError('price')"
+                 class="invalid-feedback">
+                    <div *ngIf="form.get('price').errors?.required">
+                    City is required.
+                    </div>
+            </div>
+        </div>
+      
+        <div class="form-group commands">
+            <button *ngIf="id" type="submit"
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid || !isLocationEdited()"
+                    class="btn btn-success">
+                Save
+            </button>
+            <button *ngIf="!id" type="submit"
+                    (click)="onSubmit()"
+                    [disabled]="form.invalid"
+                    class="btn btn-success">
+                Create
+            </button>
+            <button type="button"
+                    [routerLink]="['/locations']"
+                    class="btn btn-default">
+                Cancel
+            </button>
+        </div>
+    </div> -->
+</div>

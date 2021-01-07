@@ -35,6 +35,8 @@ namespace LashApp
             //});
 
             services.AddSingleton<IPaymentService, PaymentService>();
+            services.AddSingleton<IProductQuantityChangesService, ProductQuantityChangesService>();
+
             services.AddCors();
 
             services.AddControllersWithViews().AddJsonOptions(options => {

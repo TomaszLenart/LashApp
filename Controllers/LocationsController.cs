@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LashApp.Data.Db;
 using LashApp.Data.Models;
-using WorldCities.Data;
 using LashApp.Data.Dtos;
+using LashApp.Data;
 
 namespace LashApp.Controllers.Clients
 {

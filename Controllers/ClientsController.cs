@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using LashApp.Data.Db;
 using LashApp.Data.Models;
 using LashApp.Data;
-using WorldCities.Data;
 using LashApp.Data.Dtos;
 
 namespace LashApp.Controllers.Clients
