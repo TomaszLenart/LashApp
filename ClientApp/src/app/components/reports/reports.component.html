@@ -1,10 +1,8 @@
-<div class="row">
-    <div class="col-lg-12 ">
-            <div class="row no-margins">
-                <choose-report  (reportChange)="onReportChange($event)"></choose-report>
-            </div>
-            <div id="chosen-report-container" class="row  no-margins">
-                <report-content [chosenReport]="chosenReport" *ngIf="chosenReport!=null" (favouriteChange)="onFavouriteChange($event)"></report-content>
-            </div>
-    </div>
+
+<app-choose-report  (reportChange)="onReportChange($event)"></app-choose-report>
+
+<div id="chosen-report-container" >
+    <report-content [chosenReport]="chosenReport" *ngIf="chosenReport!=null"></report-content>
 </div>
+
+

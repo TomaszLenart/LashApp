@@ -1,4 +1,12 @@
+<span class="ibox-content no-padding col-lg-12 dropdown-margins">
+  <dropdown [title]="'DetailedList'">
+      <finances-details-table [parameters]="parameters"></finances-details-table>
+  </dropdown>
+</span>
 
+
+
+<!-- 
 <table mat-table [dataSource]="appointments" class="mat-elevation-z8" [hidden]="!appointments"
 matSort (matSortChange)="loadData()"
 matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
@@ -54,9 +62,8 @@ matSortActive="{{defaultSortColumn}}" matSortDirection="{{defaultSortOrder}}">
 <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="'highlight'" (click)="getRecord(row)"></tr>
 </table>
 ﻿
-<!-- Pagination directive -->
 <mat-paginator [hidden]="!appointments"
 (page)="getData($event)"
 [pageSize]="10"
 [pageSizeOptions]="[10, 20, 50]"
-showFirstLastButtons></mat-paginator>
+showFirstLastButtons></mat-paginator> -->

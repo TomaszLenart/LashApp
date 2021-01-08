@@ -1,0 +1,7 @@
+<ng-container>
+    <span *ngIf="chosenReport">{{chosenReport.name}}</span>
+</ng-container>
+<ng-container [ngSwitch]="chosenReport.id">
+    <app-finances-report *ngSwitchCase="0"></app-finances-report>
+    <app-clients-report *ngSwitchCase="1"></app-clients-report>
+</ng-container>

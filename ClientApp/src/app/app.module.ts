@@ -32,6 +32,15 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { ProductEditComponent } from './components/products/product-details/product-edit/product-edit.component';
 import { ProductHistoryComponent } from './components/products/product-details/product-history/product-history.component';
 import { ProductQuantityChangeComponent } from './components/products/product-details/product-quantity-change/product-quantity-change.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ChooseReportComponent } from './components/reports/choose-report/choose-report.component';
+import { FinancesReportComponent } from './components/reports/report-content/finances-report/finances-report.component';
+import { FinancesReportDetailsTableComponent } from './components/reports/report-content/finances-report/finances-report-details-table.component';
+import { ReportContentComponent } from './components/reports/report-content/report-content.component';
+import { TableHelpers } from './shared/helpers/table-helpers';
+import { ClientsReportComponent } from './components/reports/report-content/clients-report/clients-report.component';
+import { ClientsReportDetailsTableComponent } from './components/reports/report-content/clients-report/clients-report-details-table.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +64,14 @@ import { ProductQuantityChangeComponent } from './components/products/product-de
     ProductsComponent,
     ProductEditComponent,
     ProductHistoryComponent,
-    ProductQuantityChangeComponent
+    ProductQuantityChangeComponent,
+    ChooseReportComponent,
+    ReportsComponent,
+    FinancesReportComponent,
+    FinancesReportDetailsTableComponent,
+    ReportContentComponent,
+    ClientsReportComponent,
+    ClientsReportDetailsTableComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -82,6 +98,8 @@ import { ProductQuantityChangeComponent } from './components/products/product-de
       { path: 'products', component: ProductsComponent },
       { path: 'product/:id', component: ProductDetailsComponent },
       { path: 'product', component: AppointmentEditComponent },
+      { path: 'reports', component: ReportsComponent },
+
 
 
 
@@ -92,7 +110,7 @@ import { ProductQuantityChangeComponent } from './components/products/product-de
     CommonModule,
     ScheduleModule
   ],
-  providers: [LocationService,ClientService],
+  providers: [LocationService,ClientService,TableHelpers],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
