@@ -2,7 +2,7 @@
 
 LashApp - manage your buisness easily!
 
-  LashApp is a system providing an easy way to managing and scheduling your clients a beauty salon. 
+  LashApp is a system providing an easy way to managing and scheduling your clients in a beauty salon. 
   
 It gives you all necessary funcionalities, as below:
   - Clients - Manage your clients data, appointments history and treatments photo documentation
