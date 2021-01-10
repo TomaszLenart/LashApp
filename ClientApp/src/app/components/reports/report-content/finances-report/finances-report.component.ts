@@ -1,4 +1,5 @@
 import { Component, ViewChild, Input, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableHelpers } from 'src/app/shared/helpers/table-helpers';
 import { ReportService } from '../../report.service';
@@ -14,16 +15,18 @@ export class FinancesReportComponent {
 
     params:IFinancesReportParameters;
     dataSource:MatTableDataSource<IFinancesReportDetailsItem>;
+    form: FormGroup;
+    incomeOnly = false;
 
     constructor( private _tableHelpers: TableHelpers,  @Inject('BASE_URL') private baseUrl: string, private reportService: ReportService) {
+        this.form = new FormGroup({
+            from: new FormControl('', Validators.required),
+            to: new FormControl('', Validators.required)});
+            
 
     }
     generate(){
-        this.params = {
-            from: new Date('2021-01-01'),
-            to: new Date('2021-01-10'),
-            incomeOnly: false
-        }
+      this.setParams();
 
         this.reportService.getFinancesReportDetails(this.params).subscribe( result =>{
             console.log(result);
@@ -31,5 +34,11 @@ export class FinancesReportComponent {
 
             }
         )
+    }
+    setParams(){
+        this.params = new IFinancesReportParameters();
+        this.params.from = this.form.get("from").value;
+        this.params.to = this.form.get("to").value;
+        this.params.incomeOnly = this.incomeOnly;
     }
 }

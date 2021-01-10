@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IFinancesReportDetailsItem } from './models/finances-report-details-item';
 import { ReportService } from '../../report.service';
 import { IFinancesReportParameters } from './models/finances-report-parameters';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'finances-details-table',
@@ -16,7 +17,6 @@ export class FinancesReportDetailsTableComponent implements OnInit{
 
     params:IFinancesReportParameters;
     @Input() dataSource:MatTableDataSource<IFinancesReportDetailsItem>;
-    
     colNames = [
         "position",
         "date",
@@ -25,28 +25,15 @@ export class FinancesReportDetailsTableComponent implements OnInit{
        
     ]
 
-    constructor( private _tableHelpers: TableHelpers,  @Inject('BASE_URL') private baseUrl: string, private reportService: ReportService) {
-
+    constructor() {
+      
     }
 
     ngOnInit(): void {
         
     }
 
-    generate(){
-        this.params = {
-            from: new Date('2021-01-01'),
-            to: new Date('2021-01-10'),
-            incomeOnly: false
-        }
 
-        this.reportService.getFinancesReportDetails(this.params).subscribe( result =>{
-            console.log(result);
-            this.dataSource = new MatTableDataSource<IFinancesReportDetailsItem>(result);
-
-            }
-        )
-    }
-
+   
   
 }

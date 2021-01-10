@@ -1,4 +1,23 @@
 <span class="ibox-content no-padding col-lg-12 dropdown-margins">
+  <div class="form" [formGroup]="form" >
+    <mat-form-field>
+      <mat-label>Od:</mat-label>
+      <input formControlName="from" id="from" matInput [matDatepicker]="pickerFrom"  placeholder="Data od">
+      <mat-datepicker-toggle  matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Do:</mat-label>
+    <input  formControlName="to" id="to" matInput [matDatepicker]="pickerTo"  placeholder="Data do">
+    <mat-datepicker-toggle  matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+    <mat-datepicker #pickerTo></mat-datepicker>
+  </mat-form-field>
+  </div>
+  <div>
+    Tylko przychody:
+    <input type="checkbox" name="incomeOnly" [(ngModel)]="incomeOnly" >   
+  </div>
+
   <button type="button" class="btn btn-primary" (click)="generate()">Generuj</button>
   <dropdown *ngIf="dataSource" [title]="'DetailedList'">
       <finances-details-table [dataSource]="dataSource"></finances-details-table>
