@@ -7,5 +7,10 @@ namespace LashApp.Data.Dtos
 {
     public class FinancesReportDetailsItemDto
     {
+        public int Position { get; set; }
+        public DateTime? Date { get; set; }
+        public string Name { get; set; }
+        public decimal? Value { get; set; }
+
     }
 }

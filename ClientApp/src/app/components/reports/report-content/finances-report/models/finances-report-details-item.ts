@@ -1,5 +1,6 @@
 export class IFinancesReportDetailsItem{
+    position:number;
     date:Date;
     name: string;
-    price: number;
+    value: number;
 }

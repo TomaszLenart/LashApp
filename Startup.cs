@@ -1,6 +1,8 @@
 using LashApp.Data.Db;
 using LashApp.Data.Interfaces;
+using LashApp.Data.Interfaces.Reports;
 using LashApp.Data.Services;
+using LashApp.Data.Services.Reports;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +38,8 @@ namespace LashApp
 
             services.AddSingleton<IPaymentService, PaymentService>();
             services.AddSingleton<IProductQuantityChangesService, ProductQuantityChangesService>();
+            services.AddSingleton<IFinancesReportService, FinancesReportService>();
+
 
             services.AddCors();
 

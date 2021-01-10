@@ -2,7 +2,9 @@ import { Component, ViewChild, Input, Inject, OnInit } from '@angular/core';
 import { TableHelpers } from 'src/app/shared/helpers/table-helpers';
 import * as $ from 'jquery';
 import { MatTableDataSource } from '@angular/material/table';
-import { IFinancesReportDetailsItem } from './finances-report-details-item';
+import { IFinancesReportDetailsItem } from './models/finances-report-details-item';
+import { ReportService } from '../../report.service';
+import { IFinancesReportParameters } from './models/finances-report-parameters';
 
 @Component({
     selector: 'finances-details-table',
@@ -11,51 +13,40 @@ import { IFinancesReportDetailsItem } from './finances-report-details-item';
 })
 export class FinancesReportDetailsTableComponent implements OnInit{
 
-    constructor( private _tableHelpers: TableHelpers,  @Inject('BASE_URL') private baseUrl: string) {
 
-    }
-    ngOnInit(): void {
-        this.dataSource = new MatTableDataSource<IFinancesReportDetailsItem>(this.items);
-    }
-
-    tableId: string = "finances-details-table";
+    params:IFinancesReportParameters;
+    @Input() dataSource:MatTableDataSource<IFinancesReportDetailsItem>;
+    
     colNames = [
+        "position",
         "date",
         "name",
-        "price"
+        "value"
        
     ]
-    dataSource;
-    items: any = [
 
-        {'date':'2020-12-12', 'name':'Waciki','price':'5'},
-        {'date':'2020-12-13', 'name':'Waciki','price':'5'}
+    constructor( private _tableHelpers: TableHelpers,  @Inject('BASE_URL') private baseUrl: string, private reportService: ReportService) {
 
-    ]
+    }
 
-    // @Input() parameters: FinancesReportParameters = new FinancesReportParameters();
-    // route: string = ApiRoutes.FinancesDetails;
-    table;
+    ngOnInit(): void {
+        
+    }
 
-    // ngAfterViewInit() {
-    //     // var options = this._tableHelpers.prepareFinancesReportTableOptions(this.baseUrl + '/api/FinancesReport/details')
-    //     // this.table = (<any>$("#" + this.tableId)).DataTable(options);
-    //     this.dataSource = new MatTableDataSource<IFinancesReportDetailsItem>(this.items);
-    // }
+    generate(){
+        this.params = {
+            from: new Date('2021-01-01'),
+            to: new Date('2021-01-10'),
+            incomeOnly: false
+        }
 
-    // generate(){
-    //     var options = this._tableHelpers.prepareFinancesReportTableOptions(this.baseUrl + '/api/FinancesReport/details')
-    //     this.table = (<any>$("#" + this.tableId)).DataTable(options);
-    // }
-    // public refreshTable() {
-    //     if(this.table.settings()[0].jqXHR){
-    //         this.table.settings()[0].jqXHR.abort();
-    //     }
-    //     this.table.clear();
-    //     this.table.destroy();
-    //     var options = this._tableHelpers.prepareFinancesReportTableOptions(this.route, this.parameters)
-    //     this.table = (<any>$("#" + this.tableId)).DataTable(options);
-    // }
+        this.reportService.getFinancesReportDetails(this.params).subscribe( result =>{
+            console.log(result);
+            this.dataSource = new MatTableDataSource<IFinancesReportDetailsItem>(result);
+
+            }
+        )
+    }
 
   
 }

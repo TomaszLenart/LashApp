@@ -40,6 +40,7 @@ import { ReportContentComponent } from './components/reports/report-content/repo
 import { TableHelpers } from './shared/helpers/table-helpers';
 import { ClientsReportComponent } from './components/reports/report-content/clients-report/clients-report.component';
 import { ClientsReportDetailsTableComponent } from './components/reports/report-content/clients-report/clients-report-details-table.component';
+import { ReportService } from './components/reports/report.service';
 
 
 @NgModule({
@@ -110,7 +111,7 @@ import { ClientsReportDetailsTableComponent } from './components/reports/report-
     CommonModule,
     ScheduleModule
   ],
-  providers: [LocationService,ClientService,TableHelpers],
+  providers: [LocationService,ClientService,TableHelpers,ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
