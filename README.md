@@ -1,6 +1,6 @@
 # LashApp
 
-LashApp - manage your buisness easily!
+LashApp - manage your business easily!
 
   LashApp is a system providing an easy way to managing and scheduling your clients in a beauty salon. 
   
